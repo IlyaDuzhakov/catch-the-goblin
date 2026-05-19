@@ -6,7 +6,7 @@ class Goblin {
     this.stopGame = stopGame;
     this.clear = clear;
     this.blocks = blocks;
-    this.maxErrors = 5;
+    this.maxErrors = 7;
     this.success = 0;
     this.errors = 0;
     this.lastIndex = -1;
@@ -47,13 +47,13 @@ class Goblin {
   return 1000;
 }
   startGame(pic = picture) {
-    const textErrors = document.querySelector(".errors");
+    const lives = document.querySelector(".lives");
     const message = document.querySelector(".message");
     this.picturesCount = this.picturesCount + 1;
     if (this.picturesCount > this.success + this.errors) {
       if (this.errors < this.maxErrors) {
         this.errors = this.errors + 1;
-        if (this.errors === 5) {
+        if (this.errors === this.maxErrors) {
           message.innerHTML = "Game Over"; // тесты выявили ошибку в логике в случае отсутствия 5 клика не отображалась надпись "Game Over"
           const restartBtn = document.querySelector(".restart-btn");
 
@@ -62,7 +62,7 @@ class Goblin {
           }
           this.stopGame();
         }
-        textErrors.innerHTML = textErrors.innerHTML - 1;
+        lives.textContent = "❤️".repeat(this.maxErrors - this.errors);
       } else {
         message.innerHTML = "Game Over";
         const restartBtn = document.querySelector(".restart-btn");
@@ -84,13 +84,13 @@ class Goblin {
 
   clickOnBlocks() {
     const textSuccess = document.querySelector(".success");
-    const textErrors = document.querySelector(".errors");
+    const lives = document.querySelector(".lives");
     const message = document.querySelector(".message");
     for (let i = 0; i < this.blocks.length; i = i + 1) {
       this.blocks[i].addEventListener("click", (event) => {
         if (event.target.classList.contains("picture")) {
           // contains проверяет наличие класса и возвращает boolean
-          if (this.errors < 5) {
+          if (this.errors < this.maxErrors) {
             this.success = this.success + 1;
             textSuccess.innerHTML = this.success;
             event.target.remove(); // удаляем картинку
@@ -101,7 +101,7 @@ class Goblin {
         } else {
           if (this.errors < this.maxErrors) {
             this.errors = this.errors + 1;
-            textErrors.innerHTML = textErrors.innerHTML - 1;
+            lives.textContent = "❤️".repeat(this.maxErrors - this.errors);
           } else {
             message.innerHTML = "Game Over";
             this.stopGame();

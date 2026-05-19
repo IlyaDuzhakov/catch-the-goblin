@@ -1,44 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="top-panel">
       <h1 class="catch_the_goblin">Поймай гоблина!</h1>
       <button class="restart-btn">Новая игра</button>
     </div>
-   <div class="wrapper">
-    <div class="game_board_wrapper">
-    <div class="container">
-       
-    </div>
-</div>
+    <div class="wrapper">
+      <div class="game_board_wrapper">
+        <div class="container"></div>
+      </div>
 
-    <div class="count">
-        <h1>Счет:
-            <span class="success">0</span>
+      <div class="count">
+        <h1>
+          Счет:
+          <span class="success">0</span>
         </h1>
-        <h1>Осталось попыток:
-            <span class="errors">5</span>
-        </h1>
-        <div class="message">
-            
-        </div>
-        
-    </div>
+        <h1 class="lives-title">Осталось попыток:</h1>
+        <div class="lives">❤️❤️❤️❤️❤️❤️❤️</div>
+        <div class="message"></div>
+      </div>
     </div>
 
     <div class="record-popup hidden">
-  <div class="record-popup__content">
-    <div class="record-popup__firework">🎉</div>
-    <h2>Поздравляю!</h2>
-    <p>Новый рекорд:</p>
-    <strong class="record-score">0</strong>
-    <button class="record-popup__btn">Ок</button>
-  </div>
-</div>
-</body>
+      <div class="record-popup__content">
+        <div class="record-popup__firework">🎉</div>
+        <h2>Поздравляю!</h2>
+        <p>Новый рекорд:</p>
+        <strong class="record-score">0</strong>
+        <button class="record-popup__btn">Ок</button>
+      </div>
+    </div>
+    <audio class="game-music" loop></audio>
+
+    <button class="music-btn">🎵 Музыка</button>
+  </body>
 </html>

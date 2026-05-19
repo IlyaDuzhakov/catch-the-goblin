@@ -2,6 +2,7 @@ import "./style.css";
 
 import { Board } from "./board.js";
 import { Goblin } from "./goblin.js";
+import gameMusic from "./audio/game-music.mp3";
 
 let timerId  // если мы создали переменную и не присвоили ей значение, то по умолчанию она будет underfined
 
@@ -34,7 +35,7 @@ function restartGame() {
   goblin.picturesCount = 0;
   clearInterval(timerId);
   document.querySelector(".success").textContent = "0";
-  document.querySelector(".errors").textContent = "5";
+  document.querySelector(".lives").textContent = "❤️❤️❤️❤️❤️❤️❤️";
   document.querySelector(".message").textContent = "";
 
   const restartBtn = document.querySelector(".restart-btn");
@@ -61,6 +62,12 @@ popupBtn.addEventListener("click", () => {
   popup.classList.add("hidden");
 });
 
+const music = document.querySelector(".game-music");
+const musicBtn = document.querySelector(".music-btn");
+
+music.src = gameMusic;
+music.volume = 0.3;
+
 function showRecordPopup(score) {
   const popup = document.querySelector(".record-popup");
   const recordScore = document.querySelector(".record-score");
@@ -82,4 +89,12 @@ function checkRecord() {
   }
 }
 
-
+musicBtn.addEventListener("click", () => {
+  if (music.paused) {
+    music.play();
+    musicBtn.textContent = "🔇 Выключить";
+  } else {
+    music.pause();
+    musicBtn.textContent = "🎵 Музыка";
+  }
+});

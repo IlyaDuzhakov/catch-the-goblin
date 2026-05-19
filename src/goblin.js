@@ -1,7 +1,7 @@
 import picture from "./images/goblin.png";
 
 class Goblin {
-  constructor(clear, blocks, stopGame) {
+  constructor(clear, blocks, stopGame, restartTimer) {
     //this.timerId = timerId // для доступа за пределами функции constructor
     this.stopGame = stopGame;
     this.clear = clear;
@@ -11,6 +11,7 @@ class Goblin {
     this.errors = 0;
     this.lastIndex = -1;
     this.picturesCount = 0;
+    this.restartTimer = restartTimer;
   }
   getRandomIndex() {
     let number;
@@ -22,6 +23,29 @@ class Goblin {
       return number;
     }
   }
+  getSpeed() {
+  if (this.success >= 50) {
+    return 500;
+  }
+
+  if (this.success >= 40) {
+    return 600;
+  }
+
+  if (this.success >= 30) {
+    return 700;
+  }
+
+  if (this.success >= 20) {
+    return 800;
+  }
+
+  if (this.success >= 10) {
+    return 900;
+  }
+
+  return 1000;
+}
   startGame(pic = picture) {
     const textErrors = document.querySelector(".errors");
     const message = document.querySelector(".message");
@@ -70,6 +94,9 @@ class Goblin {
             this.success = this.success + 1;
             textSuccess.innerHTML = this.success;
             event.target.remove(); // удаляем картинку
+            if (this.restartTimer) {
+  this.restartTimer();
+}
           }
         } else {
           if (this.errors < this.maxErrors) {

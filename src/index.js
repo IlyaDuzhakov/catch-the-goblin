@@ -9,7 +9,7 @@ const board = new Board(".container");
 const goblin = new Goblin(board.clearBlocks, board.blocksList, () => {
   clearInterval(timerId)
    checkRecord();
-})
+}, startTimer)
 
 board.renderBlocks();
 
@@ -18,6 +18,15 @@ goblin.clickOnBlocks();
 timerId = setInterval(() => {
    goblin.startGame();
  }, 1000);
+
+
+ function startTimer() {
+  clearInterval(timerId);
+
+  timerId = setInterval(() => {
+    goblin.startGame();
+  }, goblin.getSpeed());
+}
 
 function restartGame() {
   goblin.success = 0;
@@ -35,10 +44,7 @@ function restartGame() {
   }
 
   goblin.startGame();
-
-  timerId = setInterval(() => {
-    goblin.startGame();
-  }, 1000);
+  startTimer();
 }
 
 const restartBtn = document.querySelector(".restart-btn");

@@ -15,14 +15,12 @@ describe("game", () => {
     document.body.innerHTML = `
       <div class="container"></div>
       <div class="success">0</div>
-      <div class="errors">0</div>
+      <div class="lives">❤️❤️❤️❤️❤️❤️❤️</div>
       <div class="message"></div>
     `;
     //создаем экземпляр класса game и получаем доступ к html элементам
-    board = new Board(".container")
-    goblin = new Goblin(board.clearBlocks, board.blocksList, () => {
-      
-    })
+    board = new Board(".container");
+    goblin = new Goblin(board.clearBlocks, board.blocksList, () => {});
     container = document.querySelector(".container");
 
     successEl = document.querySelector(".success");
@@ -68,27 +66,26 @@ describe("game", () => {
     emptyBlock.click();
     //проверяем что ошибка появилась и отрисовалась
     expect(goblin.errors).toBe(2);
-    expect(errorsEl.textContent).toBe("-2");
+    expect(document.querySelector(".lives").textContent).toBe("❤️❤️❤️❤️❤️");
   });
 
-   test("отсутствие кликов", () => {
-        board.renderBlocks();
-        goblin.startGame("test.png");
-        goblin.clickOnBlocks();
-        goblin.picturesCount = 6
-        goblin.success = 1
-        goblin.errors = 4
-        goblin.startGame()
-        expect(goblin.errors).toBe(5)
-        expect(messageEl.textContent).toBe('Game Over')
-   })
-
-  test("окончание игры после 5 ошибок", () => {
+  test("отсутствие кликов", () => {
     board.renderBlocks();
     goblin.startGame("test.png");
     goblin.clickOnBlocks();
-    // ошибки до 5
-    goblin.errors = 5;
+    goblin.picturesCount = 8;
+    goblin.success = 1;
+    goblin.errors = 6;
+    goblin.startGame();
+    expect(goblin.errors).toBe(7);
+    expect(messageEl.textContent).toBe("Game Over");
+  });
+
+  test("окончание игры после 7 ошибок", () => {
+    board.renderBlocks();
+    goblin.startGame("test.png");
+    goblin.clickOnBlocks();
+    goblin.errors = 6;
     const emptyBlock = [...container.querySelectorAll(".block")].find(
       (block) => !block.querySelector("img"),
     );
@@ -97,49 +94,50 @@ describe("game", () => {
       goblin.startGame();
     }, 1000);
     emptyBlock.click();
-    expect(messageEl.textContent).toBe("Game Over"); //проверяем, что в конце будет надпись об окончании игры
+    expect(goblin.errors).toBe(7);
+    expect(messageEl.textContent).toBe("Game Over");
+    //проверяем, что в конце будет надпись об окончании игры
   });
-  // });
-// оптимизировали код будет делаться перед каждым тестом
+  
+ 
+  test("новая игра сбрасывает счет и ошибки", () => {
+    goblin.success = 10;
+    goblin.errors = 6;
+    goblin.picturesCount = 20;
 
-test("новая игра сбрасывает счет и ошибки", () => {
-  goblin.success = 10;
-  goblin.errors = 5;
-  goblin.picturesCount = 20;
+    goblin.success = 0;
+    goblin.errors = 0;
+    goblin.picturesCount = 0;
 
-  goblin.success = 0;
-  goblin.errors = 0;
-  goblin.picturesCount = 0;
+    expect(goblin.success).toBe(0);
+    expect(goblin.errors).toBe(0);
+    expect(goblin.picturesCount).toBe(0);
+  });
 
-  expect(goblin.success).toBe(0);
-  expect(goblin.errors).toBe(0);
-  expect(goblin.picturesCount).toBe(0);
-});
+  test("сохранение нового рекорда в localStorage", () => {
+    localStorage.setItem("bestScore", "5");
 
-test("сохранение нового рекорда в localStorage", () => {
-  localStorage.setItem("bestScore", "5");
+    goblin.success = 10;
 
-  goblin.success = 10;
+    const currentScore = goblin.success;
+    const bestScore = Number(localStorage.getItem("bestScore")) || 0;
 
-  const currentScore = goblin.success;
-  const bestScore = Number(localStorage.getItem("bestScore")) || 0;
+    if (currentScore > bestScore) {
+      localStorage.setItem("bestScore", currentScore);
+    }
 
-  if (currentScore > bestScore) {
-    localStorage.setItem("bestScore", currentScore);
-  }
+    expect(localStorage.getItem("bestScore")).toBe("10");
+  });
 
-  expect(localStorage.getItem("bestScore")).toBe("10");
-});
-
-test("кнопка новой игры появляется после Game Over", () => {
-  document.body.innerHTML += `
+  test("кнопка новой игры появляется после Game Over", () => {
+    document.body.innerHTML += `
     <button class="restart-btn" style="display: none"></button>
   `;
 
-  const restartBtn = document.querySelector(".restart-btn");
+    const restartBtn = document.querySelector(".restart-btn");
 
-  restartBtn.style.display = "block";
+    restartBtn.style.display = "block";
 
-  expect(restartBtn.style.display).toBe("block");
+    expect(restartBtn.style.display).toBe("block");
+  });
 });
-}); 

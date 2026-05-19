@@ -24,28 +24,28 @@ class Goblin {
     }
   }
   getSpeed() {
-  if (this.success >= 50) {
-    return 500;
-  }
+    if (this.success >= 50) {
+      return 500;
+    }
 
-  if (this.success >= 40) {
-    return 600;
-  }
+    if (this.success >= 40) {
+      return 600;
+    }
 
-  if (this.success >= 30) {
-    return 700;
-  }
+    if (this.success >= 30) {
+      return 700;
+    }
 
-  if (this.success >= 20) {
-    return 800;
-  }
+    if (this.success >= 20) {
+      return 800;
+    }
 
-  if (this.success >= 10) {
-    return 900;
-  }
+    if (this.success >= 10) {
+      return 900;
+    }
 
-  return 1000;
-}
+    return 1000;
+  }
   startGame(pic = picture) {
     const lives = document.querySelector(".lives");
     const message = document.querySelector(".message");
@@ -95,13 +95,19 @@ class Goblin {
             textSuccess.innerHTML = this.success;
             event.target.remove(); // удаляем картинку
             if (this.restartTimer) {
-  this.restartTimer();
-}
+              this.restartTimer();
+            }
           }
         } else {
           if (this.errors < this.maxErrors) {
             this.errors = this.errors + 1;
+
             lives.textContent = "❤️".repeat(this.maxErrors - this.errors);
+
+            if (this.errors === this.maxErrors) {
+              message.innerHTML = "Game Over";
+              this.stopGame();
+            }
           } else {
             message.innerHTML = "Game Over";
             this.stopGame();

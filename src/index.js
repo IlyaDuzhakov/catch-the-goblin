@@ -3,8 +3,14 @@ import "./style.css";
 import { Board } from "./board.js";
 import { Goblin } from "./goblin.js";
 import gameMusic from "./audio/game-music.mp3";
+import soundOn from "./images/sound-on.png";
+import soundOff from "./images/sound-off.png";
 
 let timerId  // если мы создали переменную и не присвоили ей значение, то по умолчанию она будет underfined
+
+const musicIcon = document.querySelector(".music-icon");
+
+musicIcon.src = soundOff;
 
 const board = new Board(".container");
 const goblin = new Goblin(board.clearBlocks, board.blocksList, () => {
@@ -76,6 +82,8 @@ function showRecordPopup(score) {
   popup.classList.remove("hidden");
 }
 
+
+
 function checkRecord() {
   const currentScore = goblin.success;
   const bestScore = Number(localStorage.getItem("bestScore")) || 10;
@@ -92,9 +100,9 @@ function checkRecord() {
 musicBtn.addEventListener("click", () => {
   if (music.paused) {
     music.play();
-    musicBtn.textContent = "🔇 Выключить";
+    musicIcon.src = soundOn;
   } else {
     music.pause();
-    musicBtn.textContent = "🎵 Музыка";
+    musicIcon.src = soundOff;
   }
 });

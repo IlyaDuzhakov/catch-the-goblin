@@ -16,6 +16,7 @@ body {
   display: flex;
   flex-direction: column;
   z-index: 100;
+  
 }
 
 .catch_the_goblin {
@@ -96,7 +97,6 @@ body {
 
 .restart-btn {
   display: none;
-  margin-top: 20px;
   padding: 12px 24px;
   border: none;
   border-radius: 12px;
@@ -199,6 +199,50 @@ body {
   font-size: 20px;
   font-weight: 700;
 }
+
+
+.music-btn {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+
+  width: 52px;
+  height: 52px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.55);
+  color: white;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(8px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 10000;
+
+  transition: 0.3s;
+}
+
+.music-btn:hover {
+  transform: scale(1.08);
+}
+
+
+.music-icon {
+  width: 26px;
+  height: 26px;
+
+  object-fit: contain;
+  pointer-events: none;
+}
+
 
 @keyframes popup {
   from {
@@ -375,34 +419,11 @@ body {
     font-size: 28px;
     letter-spacing: 3px;
   }
-}
-
-.music-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-
-  padding: 12px 18px;
-
-  border: none;
-  border-radius: 12px;
-
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-
-  cursor: pointer;
-
-  backdrop-filter: blur(8px);
-
-  font-size: 16px;
-
-  z-index: 1000;
-
-  transition: 0.3s;
-}
-
-.music-btn:hover {
-  transform: scale(1.05);
+  
+  .music-icon {
+    width: 22px;
+    height: 22px;
+  }
 }
 
 

@@ -30,3 +30,8 @@ https://ilyaduzhakov.github.io/catch-the-goblin/
 
 ### mobail_version
 ![mobail](./screenshots/mobail_version.png)
+
+## Assets
+
+Audio icons by Icons8:
+https://icons8.com

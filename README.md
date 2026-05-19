@@ -15,17 +15,17 @@ a Game Over message appears;
 the New Game button becomes available;
 a congratulation popup appears if a new high score is achieved.
 
-![CI](https://github.com/IlyaDuzhakov/event_game/actions/workflows/main.yml/badge.svg)
+![CI](![CI](https://github.com/IlyaDuzhakov/catch-the-goblin/actions/workflows/main.yml/badge.svg))
 ##  Live Demo
-https://ilyaduzhakov.github.io/event_game/
+https://ilyaduzhakov.github.io/catch-the-goblin/
 
 ##  Screenshots
 
 ### Main Gameplay
-![Gameplay](./src/images/screenshot-1.png)
+![Gameplay](./screenshots/main-gameplay.png)
 
 ### New Record Popup
-![Popup](./src/images/screenshot-2.png)
+![Popup](./screenshots/new-record-popup.png)
 
 ### mobail_version
-![mobail](./src/images/mobail_version.png)
+![mobail](./screenshots/mobail_version.png)

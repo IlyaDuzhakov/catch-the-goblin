@@ -15,7 +15,8 @@ a Game Over message appears;
 the New Game button becomes available;
 a congratulation popup appears if a new high score is achieved.
 
-![CI](![CI](https://github.com/IlyaDuzhakov/catch-the-goblin/actions/workflows/main.yml/badge.svg))
+![CI](https://github.com/IlyaDuzhakov/catch-the-goblin/actions/workflows/main.yml/badge.svg)
+
 ##  Live Demo
 https://ilyaduzhakov.github.io/catch-the-goblin/
 
